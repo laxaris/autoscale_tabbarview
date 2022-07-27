@@ -32,7 +32,6 @@ class _SizeDetectorWidgetState extends State<SizeDetectorWidget> {
   void _detectSize() {
     final size = context.size;
     if (_oldSize != size) {
-      print("anan");
       _oldSize = size;
       widget.onSizeDetect(size!);
     }
