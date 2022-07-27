@@ -208,6 +208,7 @@ class _AutoScaleTabBarViewState extends State<AutoScaleTabBarView> {
 
   @override
   Widget build(BuildContext context) {
+    print("anan");
     assert(() {
       if (_controller!.length != widget.children.length) {
         throw FlutterError(
