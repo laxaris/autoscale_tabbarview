@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+//basri was here
 import 'sized_pageview.dart';
 
 class AutoScaleTabBarView extends StatefulWidget {
@@ -13,9 +13,7 @@ class AutoScaleTabBarView extends StatefulWidget {
     this.controller,
     this.physics,
     this.dragStartBehavior = DragStartBehavior.start,
-  })  : assert(children != null),
-        assert(dragStartBehavior != null),
-        super(key: key);
+  }) : super(key: key);
 
   /// This widget's selection and animation state.
   ///
@@ -78,11 +76,13 @@ class _AutoScaleTabBarViewState extends State<AutoScaleTabBarView> {
 
     if (newController == _controller) return;
 
-    if (_controllerIsValid)
+    if (_controllerIsValid) {
       _controller!.animation!.removeListener(_handleTabControllerAnimationTick);
+    }
     _controller = newController;
-    if (_controller != null)
+    if (_controller != null) {
       _controller!.animation!.addListener(_handleTabControllerAnimationTick);
+    }
   }
 
   @override
@@ -103,14 +103,16 @@ class _AutoScaleTabBarViewState extends State<AutoScaleTabBarView> {
   void didUpdateWidget(AutoScaleTabBarView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) _updateTabController();
-    if (widget.children != oldWidget.children && _warpUnderwayCount == 0)
+    if (widget.children != oldWidget.children && _warpUnderwayCount == 0) {
       _updateChildren();
+    }
   }
 
   @override
   void dispose() {
-    if (_controllerIsValid)
+    if (_controllerIsValid) {
       _controller!.animation!.removeListener(_handleTabControllerAnimationTick);
+    }
     _controller = null;
     // We don't own the _controller Animation, so it's not disposed here.
     super.dispose();
@@ -122,8 +124,9 @@ class _AutoScaleTabBarViewState extends State<AutoScaleTabBarView> {
   }
 
   void _handleTabControllerAnimationTick() {
-    if (_warpUnderwayCount > 0 || !_controller!.indexIsChanging)
-      return; // This widget is driving the controller's animation.
+    if (_warpUnderwayCount > 0 || !_controller!.indexIsChanging) {
+      return;
+    } // This widget is driving the controller's animation.
 
     if (_controller!.index != _currentIndex) {
       _currentIndex = _controller!.index;
@@ -134,8 +137,9 @@ class _AutoScaleTabBarViewState extends State<AutoScaleTabBarView> {
   Future<void> _warpToCurrentIndex() async {
     if (!mounted) return Future<void>.value();
 
-    if (_pageController.page == _currentIndex!.toDouble())
+    if (_pageController.page == _currentIndex!.toDouble()) {
       return Future<void>.value();
+    }
 
     final int previousIndex = _controller!.previousIndex;
     if ((_currentIndex! - previousIndex).abs() == 1) {
